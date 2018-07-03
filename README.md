@@ -2,7 +2,7 @@
 
 Path generator for Fortnite: Battle Royale
 
-Sandy Pan
+Sandy Pans
 
 Austin Zhang
 
