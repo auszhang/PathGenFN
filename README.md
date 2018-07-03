@@ -1,4 +1,4 @@
-# FN_Path_Gen
+# PathGenFN
 
 Path generator for Fortnite: Battle Royale
 
