@@ -2,7 +2,7 @@
 
 Path generator for Fortnite: Battle Royale
 
-Sandy Pan
+Sandy Pan (is a bitch)
 
 Austin Zhang
 
