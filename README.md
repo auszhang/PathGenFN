@@ -2,7 +2,9 @@
 
 Path generator for Fortnite: Battle Royale
 
-Sandy Pan (is a bitch)
+Work Log: https://docs.google.com/document/d/1CIHsurDVXeYXVk-pfgWXMFiC_gb3C0AoUuOCHGVvxp0/edit
+
+Sandy Pan
 
 Austin Zhang
 
