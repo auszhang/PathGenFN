@@ -1,17 +1,27 @@
 # PathGenFN
 
-Path generator for Fortnite: Battle Royale
+Path generator for Fortnite: Battle Royale, currently in development
 
-Work Log: https://docs.google.com/document/d/1CIHsurDVXeYXVk-pfgWXMFiC_gb3C0AoUuOCHGVvxp0/edit
+*Description of functionalities*
 
-Sandy Pan
+## Compatibility
+*Coming soon*
 
-Austin Zhang
+## Installation
+*Coming soon*
 
-Austin Chiang
+## Work Log
+https://docs.google.com/document/d/1CIHsurDVXeYXVk-pfgWXMFiC_gb3C0AoUuOCHGVvxp0/edit
 
-Michelle Chang
-
-Armaan Kohli
-
-Benjamin Hu
+## Contributors 
+>Sandy Pan
+>
+>Austin Zhang
+>
+>Austin Chiang
+>
+>Michelle Chang
+>
+>Armaan Kohli
+>
+>Benjamin Hu
