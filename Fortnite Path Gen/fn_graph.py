@@ -6,8 +6,8 @@ G = nx.Graph()
 # Named locations only, for now
 POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Anarchy Acres", "Shifty Shafts", "Greasy Grove",
             "Risky Reels", "Fatal Fields", "Lucky Landing", "Junk Junction", "Snobby Shores", "Pleasant Park",
-            "Salty Springs", "Moisty Mire", "Loot Lake", "Dusty Divot", "Tilted Towers", "Haunted Hills",
-            "Tomato Town"]
+            "Salty Springs", "Loot Lake", "Dusty Divot", "Tilted Towers", "Haunted Hills",
+            "Tomato Town", "Lazy Links", "Paradise Palms"]
 
 G.add_nodes_from(POI_list)
 
@@ -21,9 +21,8 @@ POI_dict = {"Lonely Lodge": [12, (91, 41)], "Retail Row": [18, (75, 53)], "Flush
             "Anarchy Acres": [13, (52, 22)], "Shifty Shafts": [12, (36, 64)], "Greasy Grove": [15, (22, 62)],
             "Risky Reels": [16, (75, 19)], "Fatal Fields": [18, (61, 76)], "Lucky Landing": [14, (57, 92)],
             "Junk Junction": [10, (18, 11)], "Snobby Shores": [11, (4, 44)], "Pleasant Park": [17, (27, 28)],
-            "Salty Springs": [13, (57, 61)], "Moisty Mire": [11, (83, 80)], "Loot Lake": [17, (40, 36)],
-            "Dusty Divot": [17, (60, 50)], "Tilted Towers": [34, (37, 48)], "Haunted Hills": [11, (13, 19)],
-            "Tomato Town": [5, (67, 30)]}
+            "Salty Springs": [13, (57, 61)], "Loot Lake": [17, (40, 36)], "Dusty Divot": [17, (60, 50)],
+            "Tilted Towers": [34, (37, 48)], "Haunted Hills": [11, (13, 19)], "Tomato Town": [5, (67, 30)]}
 
 
 # INPUTS: either string (POI) or tuple of int (coordinates)
@@ -113,12 +112,10 @@ def gen_path():
     path = []
     time_left = 380
     if start_node != "Unnamed Start Location":
-        time_left -= 290
+        time_left -= 90
     path.append(start_node)
-
-
-
     return path
+
 
 processed = process_text("Lonely Lodge", "E-6, 7-3")
 add_user_input(processed)
@@ -132,7 +129,7 @@ print(gen_path())
 # Assume time spent at each POI is 90 seconds
 # first POI is 90 seconds, every POI after is 60 seconds
 # START: user input coords
-# END: center of circle
+# END: center of circle // edge of circle
 # distance to END has to shrink for any node we go to
 
 # 380 seconds
