@@ -45,9 +45,6 @@ def time(c1, c2):
     return round((74/10) * distance(c1, c2), 2)
 
 
-sample_path = ["Lonely Lodge", "Retail Row", "Dusty Divot"]
-
-
 def gen_edges():
     for k, v in POI_dict.items():
         for k2, v2 in POI_dict.items():
@@ -89,7 +86,6 @@ def process_text(text1, text2):
 
 
 # Call this as add_user_input(process_text[0], process_text[1])
-
 def add_user_input(coords):
     """Adds user inputs as nodes to the graph"""
     start = coords[0]
@@ -106,9 +102,8 @@ def add_user_input(coords):
 
 
 # print(nx.dijkstra_path(G, "Lucky Landing", "Risky Reels"))
-
-
-def gen_path():
+def gen_path() -> [str]:
+    """Generates path of POIs"""
     path = []
     time_left = 380
     if start_node != "Unnamed Start Location":
@@ -117,10 +112,10 @@ def gen_path():
     return path
 
 
-processed = process_text("Lonely Lodge", "E-6, 7-3")
-add_user_input(processed)
-gen_edges()
-print(gen_path())
+def format_path(path_list):
+    """Formats results of gen_path() as str"""
+    str_result = "Path: " + str(path_list)
+    return str_result
 
 
 # PSEUDO
