@@ -105,10 +105,9 @@ circle_center = tuple()
 def add_user_input(coords):
     """Adds user inputs as nodes to the graph"""
     start = coords[0]
-    circle = coords[1]
+    # circle = coords[1]
     global circle_center
     circle_center = coords[1]
-    # POI_dict["Circle"] = [0, circle]  # Removed circle_center from POI_dict
     global start_node
 
     for k, v in POI_dict.items():
@@ -137,12 +136,12 @@ def add_user_input(coords):
 
 
 # Changed from gen_path()
-def add_start_node() -> [str]:
-    """Adds first node to empty list"""
-    if start_node.name != "Unnamed Start Location":
-        start_node.time_left -= 90
-    global path
-    path.append(start_node)
+# def add_start_node() -> [str]:
+#     """Adds first node to empty list"""
+#     if start_node.name != "Unnamed Start Location":
+#         start_node.time_left -= 90
+#     global path
+#     path.append(start_node)
 
 
 # Assumes that:
@@ -168,15 +167,11 @@ final_list = []
 
 def time_to_circle(loc):
     """Returns time to circle edge from current location"""
-    # return time(loc, POI_dict["Circle"][1]) - round((74/10) * 32.5)
     return time(loc, circle_center) - round((74/10) * 32.5)
 
 
 def find_neighbors(curr_node) -> None:
     """Find the neighbors of each POI with given time left and start point"""
-    if type(curr_node) == str:
-        print("curr_node in find_neighbors(): ", curr_node)
-
     for key, value in POI_dict.items():
         if key == curr_node.name:
             pass
@@ -214,7 +209,7 @@ def gen_path() -> list:
             max_node = node
 
     while max_node is not None:
-        path.append(max_node.name)  # Where path is global var
+        path = [max_node.name] + path
         max_node = max_node.prev
 
     path.append("Circle")
