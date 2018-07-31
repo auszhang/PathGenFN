@@ -18,7 +18,7 @@ def index_post():
     text2 = request.form['text2']
     processed = process_text(text1, text2)
     add_user_input(processed)
-    gen_edges()
+    # gen_edges()
     depth_first_search()
     path_list = gen_path()
     return format_path(path_list)

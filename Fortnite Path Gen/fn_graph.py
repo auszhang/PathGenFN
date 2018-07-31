@@ -1,15 +1,15 @@
 import math
-import networkx as nx
+#import networkx as nx
 
-G = nx.Graph()
+#G = nx.Graph()
 
 # Named locations only, for now
-POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Anarchy Acres", "Shifty Shafts", "Greasy Grove",
+POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Shifty Shafts", "Greasy Grove",
             "Risky Reels", "Fatal Fields", "Lucky Landing", "Junk Junction", "Snobby Shores", "Pleasant Park",
             "Salty Springs", "Loot Lake", "Dusty Divot", "Tilted Towers", "Haunted Hills",
             "Tomato Town", "Lazy Links", "Paradise Palms"]
 
-G.add_nodes_from(POI_list)
+#G.add_nodes_from(POI_list)
 
 Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "Viking Village", "Racetrack",
                 "Motel", "Disco Factory", "Desert Village"]
@@ -18,13 +18,12 @@ Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "V
 # Number of chests included for possible weights to POIs in the future
 # For Risky Reels, I excluded the side houses
 # For Tomato Town, I included the overpass
-POI_dict = {"Lonely Lodge": [12, (91, 41)], "Retail Row": [18, (75, 53)], "Flush Factory": [12, (34, 88)],
-            "Anarchy Acres": [13, (52, 22)], "Shifty Shafts": [12, (36, 64)], "Greasy Grove": [15, (22, 62)],
-            "Risky Reels": [16, (75, 19)], "Fatal Fields": [18, (61, 76)], "Lucky Landing": [14, (57, 92)],
-            "Junk Junction": [10, (18, 11)], "Snobby Shores": [11, (4, 44)], "Pleasant Park": [17, (27, 28)],
-            "Salty Springs": [13, (57, 61)], "Loot Lake": [17, (40, 36)], "Dusty Divot": [17, (60, 50)],
-            "Tilted Towers": [34, (37, 48)], "Haunted Hills": [11, (13, 19)], "Tomato Town": [5, (67, 30)],
-            "Lazy Links": [12, (53, 19)], "Paradise Palms": [15, (83, 74)]}
+POI_dict = {"Lonely Lodge": (91, 41), "Retail Row": (75, 53), "Flush Factory": (34, 88),
+            "Shifty Shafts": (36, 64), "Greasy Grove": (22, 62),
+            "Risky Reels": (75, 19), "Fatal Fields": (61, 76), "Lucky Landing": (57, 92),
+            "Salty Springs": (57, 61), "Loot Lake": (40, 36), "Dusty Divot": (60, 50),
+            "Tilted Towers": (37, 48), "Haunted Hills": (13, 19), "Tomato Town": (67, 30),
+            "Lazy Links": (53, 19), "Paradise Palms": (83, 74)}
 
 # G.add_nodes_from(POI_dict.keys)
 
@@ -35,9 +34,9 @@ def distance(c1, c2):
     # Changes from str -> tuple(int)
 
     if type(c1) == str:
-        c1 = POI_dict[c1][1]
+        c1 = POI_dict[c1]
     if type(c2) == str:
-        c2 = POI_dict[c2][1]
+        c2 = POI_dict[c2]
 
     result_int = round(math.sqrt((c1[0]-c2[0])**2 + (c1[1]-c2[1])**2), 2)  # Distance formula, rounded to 2 decimals
     return result_int
@@ -49,11 +48,11 @@ def time(c1, c2):
     return round((74/10) * distance(c1, c2), 2)
 
 
-def gen_edges():
-    for k, v in POI_dict.items():
-        for k2, v2 in POI_dict.items():
-            if k is not k2:
-                G.add_edge(k, k2, weight=time(k, k2))
+# def gen_edges():
+#     for k, v in POI_dict.items():
+#         for k2, v2 in POI_dict.items():
+#             if k is not k2:
+#                 G.add_edge(k, k2, weight=time(k, k2))
 
 
 # Prints edges
@@ -96,6 +95,9 @@ class Node():
         self.time_left = 380
         self.location = tuple()
 
+    def __repr__(self):
+        return "name: " + self.name + "," + "location: " + str(self.location)
+
 
 start_node = Node("Temp Name")  # Changed to type Node
 circle_center = tuple()
@@ -111,12 +113,12 @@ def add_user_input(coords):
     global start_node
 
     for k, v in POI_dict.items():
-        if (type(start) == str and start == k) or (type(start) == tuple and start == v[1]):
+        if (type(start) == str and start == k) or (type(start) == tuple and start == v):
             if start == k:
                 start_node.name = k
                 return
 
-    POI_dict["Unnamed Start Location"] = [0, start]
+    POI_dict["Unnamed Start Location"] = [start]
     start_node.name = "Unnamed Start Location"
 
 
@@ -178,7 +180,7 @@ def find_neighbors(curr_node) -> None:
         else:
             if curr_node.time_left >= 90 + time_to_circle(key) + time(key, curr_node.name):
                 neighbor = Node(key)
-                neighbor.location = POI_dict[key][1]
+                neighbor.location = value
                 neighbor.time_left = curr_node.time_left - (90 + time(key, curr_node.name))
                 neighbor.prev = curr_node
                 if curr_node.prev is not None:
@@ -199,7 +201,7 @@ def depth_first_search():
 
 def gen_path() -> list:
     """Adds names of nodes in longest path to global path"""
-    path = [start_node]
+    path = []
     max_visited = 0
     max_node = None
 
@@ -207,8 +209,11 @@ def gen_path() -> list:
         if node.num_before > max_visited:
             max_visited = node.num_before
             max_node = node
+        print(repr(node))
 
     while max_node is not None:
+        # if len(max_node.name) == 0:
+        #     print("Node location:", max_node.location)
         path = [max_node.name] + path
         max_node = max_node.prev
 
