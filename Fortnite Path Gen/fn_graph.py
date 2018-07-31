@@ -14,8 +14,8 @@ G.add_nodes_from(POI_list)
 Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "Viking Village", "Racetrack",
                 "Motel", "Disco Factory", "Desert Village"]
 
-# POI_dict is OBSOLETE because of Season 5 update
 # Number of chests pulled from fortnitechests.info, with some personal digression
+# Number of chests included for possible weights to POIs in the future
 # For Risky Reels, I excluded the side houses
 # For Tomato Town, I included the overpass
 POI_dict = {"Lonely Lodge": [12, (91, 41)], "Retail Row": [18, (75, 53)], "Flush Factory": [12, (34, 88)],
@@ -98,6 +98,7 @@ class Node():
 
 
 start_node = Node("Temp Name")  # Changed to type Node
+circle_center = tuple()
 
 
 # Call this as add_user_input(process_text[0], process_text[1])
@@ -105,7 +106,9 @@ def add_user_input(coords):
     """Adds user inputs as nodes to the graph"""
     start = coords[0]
     circle = coords[1]
-    POI_dict["Circle"] = [0, circle]
+    global circle_center
+    circle_center = coords[1]
+    # POI_dict["Circle"] = [0, circle]  # Removed circle_center from POI_dict
     global start_node
 
     for k, v in POI_dict.items():
@@ -129,7 +132,7 @@ def add_user_input(coords):
 
 
 # time_left = 380  # New global variable
-path = []
+# path = []
 # copy_G = G.copy()
 
 
@@ -164,7 +167,9 @@ final_list = []
 
 
 def time_to_circle(loc):
-    return time(loc, POI_dict["Circle"][1]) - round((74/10) * 32.5)
+    """Returns time to circle edge from current location"""
+    # return time(loc, POI_dict["Circle"][1]) - round((74/10) * 32.5)
+    return time(loc, circle_center) - round((74/10) * 32.5)
 
 
 def find_neighbors(curr_node) -> None:
@@ -197,8 +202,9 @@ def depth_first_search():
             stack.append(neighbor)
 
 
-def gen_path():
+def gen_path() -> list:
     """Adds names of nodes in longest path to global path"""
+    path = [start_node]
     max_visited = 0
     max_node = None
 
@@ -210,7 +216,9 @@ def gen_path():
     while max_node is not None:
         path.append(max_node.name)  # Where path is global var
         max_node = max_node.prev
-        path.append("Circle")
+
+    path.append("Circle")
+    return path
 
 
 def format_path(path_list):
