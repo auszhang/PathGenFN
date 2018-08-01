@@ -4,7 +4,7 @@ import networkx as nx
 G = nx.Graph()
 
 # Named locations only, for now
-POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Anarchy Acres", "Shifty Shafts", "Greasy Grove",
+POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Shifty Shafts", "Greasy Grove",
             "Risky Reels", "Fatal Fields", "Lucky Landing", "Junk Junction", "Snobby Shores", "Pleasant Park",
             "Salty Springs", "Loot Lake", "Dusty Divot", "Tilted Towers", "Haunted Hills",
             "Tomato Town", "Lazy Links", "Paradise Palms"]
@@ -19,15 +19,12 @@ Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "V
 # For Risky Reels, I excluded the side houses
 # For Tomato Town, I included the overpass
 POI_dict = {"Lonely Lodge": [12, (91, 41)], "Retail Row": [18, (75, 53)], "Flush Factory": [12, (34, 88)],
-            "Anarchy Acres": [13, (52, 22)], "Shifty Shafts": [12, (36, 64)], "Greasy Grove": [15, (22, 62)],
+            "Shifty Shafts": [12, (36, 64)], "Greasy Grove": [15, (22, 62)],
             "Risky Reels": [16, (75, 19)], "Fatal Fields": [18, (61, 76)], "Lucky Landing": [14, (57, 92)],
             "Junk Junction": [10, (18, 11)], "Snobby Shores": [11, (4, 44)], "Pleasant Park": [17, (27, 28)],
             "Salty Springs": [13, (57, 61)], "Loot Lake": [17, (40, 36)], "Dusty Divot": [17, (60, 50)],
             "Tilted Towers": [34, (37, 48)], "Haunted Hills": [11, (13, 19)], "Tomato Town": [5, (67, 30)],
             "Lazy Links": [12, (53, 19)], "Paradise Palms": [15, (83, 74)]}
-
-# G.add_nodes_from(POI_dict.keys)
-
 
 # INPUTS: either string (POI) or tuple of int (coordinates)
 def distance(c1, c2):
@@ -96,6 +93,8 @@ class Node():
         self.time_left = 380
         self.location = tuple()
 
+    def __repr__(self):
+        return "name: " + self.name + "," + "location: " + str(self.location)
 
 start_node = Node("Temp Name")  # Changed to type Node
 circle_center = tuple()
@@ -204,7 +203,7 @@ def depth_first_search():
 
 def gen_path() -> list:
     """Adds names of nodes in longest path to global path"""
-    path = [start_node]
+    path = []
     max_visited = 0
     max_node = None
 
@@ -214,10 +213,12 @@ def gen_path() -> list:
             max_node = node
 
     while max_node is not None:
-        path.append(max_node.name)  # Where path is global var
+        path.insert(0, max_node.name)  # Where path is global var
         max_node = max_node.prev
 
+    print(repr(path[-1]))
     path.append("Circle")
+    # path[len(path) - 1] = "Circle"
     return path
 
 
@@ -225,20 +226,3 @@ def format_path(path_list):
     """Formats results of gen_path() as str"""
     str_result = "Path: " + str(path_list)
     return str_result
-
-
-# PSEUDO
-# Such that total time for first circle is 6:20 and time remaining at end is >= 0
-#   Visit most POIs possible
-# Assume time spent at each POI is 90 seconds
-# first POI is 90 seconds, every POI after is 60 seconds
-# START: user input coords
-# END: center of circle // edge of circle
-# distance to END has to shrink for any node we go to
-
-# 380 seconds
-# START: Lonely Lodge 90 secs
-# END: (F-2, 7-7) -> (52,67)
-
-# 290 seconds
-# print(nx.dijkstra_path(G, "Lucky Landing", "Risky Reels"))

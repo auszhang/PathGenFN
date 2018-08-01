@@ -23,6 +23,10 @@ def index_post():
     path_list = gen_path()
     return format_path(path_list)
 
+#not done
+def dropdown():
+    locations = POI_list
+
 
 if __name__ == '__main__':
     app.debug = True
