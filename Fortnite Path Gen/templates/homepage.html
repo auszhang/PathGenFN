@@ -10,9 +10,29 @@
 {#    <u>Result is:#}
 {#        <li>{{ result_int }}</li>#}
 {#    </u>#}
-    <form method="POST">
+    <form name="Start Location" action = '/' method='POST'>
+        <select name="start">
+            <option value="Lonely Lodge" selected>Lonely Lodge</option>
+            <option value="Retail Row">Retail Row</option>
+            <option value="Flush Factory">Flush Factory</option>
+            <option value="Shifty Shafts">Shift Shafts</option>
+            <option value="Greasy Grove">Greasy Grove</option>
+            <option value="Risky Reels">Risky Reels</option>
+            <option value="Fatal Fields">Fatal Fields</option>
+            <option value="Lucky Landing">Lucky Landing</option>
+{#            <option value="Junk Junction">Junk Junction</option>#}
+{#            <option value="Snobby Shores">Snobby Shores</option>#}
+{#            <option value="Pleasant Park">Pleasant Park</option>#}
+            <option value="Salty Springs">Salty Springs</option>
+            <option value="Loot Lake">Loot Lake</option>
+            <option value="Dusty Divot">Dusty Divot</option>
+            <option value="Tilted Towers">Tilted Towers</option>
+            <option value="Haunted Hills">Haunted Hills</option>
+            <option value="Tomato Town">Tomato Town</option>
+            <option value="Lazy Links">Lazy Links</option>
+            <option value="Paradise Palms">Paradise Palms</option>
+        </select>
         <input name="text1">
-        <input name="text2">
         <input type="submit">
     </form>
 </body>
