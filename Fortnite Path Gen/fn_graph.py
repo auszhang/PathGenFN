@@ -12,7 +12,7 @@ POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Shifty Shafts", "Gre
 #G.add_nodes_from(POI_list)
 
 Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "Viking Village", "Racetrack",
-                "Motel", "Disco Factory", "Desert Village"]
+                "Motel", "Yonder Yard", "Desert Village"]
 
 # Number of chests pulled from fortnitechests.info, with some personal digression
 # Number of chests included for possible weights to POIs in the future
@@ -23,7 +23,12 @@ POI_dict = {"Lonely Lodge": (91, 41), "Retail Row": (75, 53), "Flush Factory": (
             "Risky Reels": (75, 19), "Fatal Fields": (61, 76), "Lucky Landing": (57, 92),
             "Salty Springs": (57, 61), "Loot Lake": (40, 36), "Dusty Divot": (60, 50),
             "Tilted Towers": (37, 48), "Haunted Hills": (13, 19), "Tomato Town": (67, 30),
-            "Lazy Links": (53, 19), "Paradise Palms": (83, 74)}
+            "Lazy Links": (53, 19), "Paradise Palms": (83, 74), "RV Park": (85, 49),
+            "Superhero Mansion": (97, 50), "Crate Yard": (74, 40), "Villain Lair": (12, 40),
+            "Viking Village": (16, 12), "Racetrack": (93, 60), "Motel": (39, 15),
+            "Western Town": (76, 80), "Yonder Yard": (42, 82), "The Big Chair": (35, 75),
+            "Retail Offset": (69, 59), "Film Factory": (34, 8), "Tunnel": (66, 35),
+            "Willow Tree": (74, 23), "Umbrella": (42, 21)}
 
 # G.add_nodes_from(POI_dict.keys)
 
@@ -33,6 +38,8 @@ def distance(c1, c2):
     """Takes set of either POI name/coordinates and returns the distance between them"""
     # Changes from str -> tuple(int)
 
+    print(c1)
+    print(c2)
     if type(c1) == str:
         c1 = POI_dict[c1]
     if type(c2) == str:
@@ -209,7 +216,6 @@ def gen_path() -> list:
         if node.num_before > max_visited:
             max_visited = node.num_before
             max_node = node
-        print(repr(node))
 
     while max_node is not None:
         # if len(max_node.name) == 0:
