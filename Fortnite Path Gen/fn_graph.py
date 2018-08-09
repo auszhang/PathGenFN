@@ -1,15 +1,10 @@
 import math
-#import networkx as nx
-
-#G = nx.Graph()
 
 # Named locations only, for now
 POI_list = ["Lonely Lodge", "Retail Row", "Flush Factory", "Shifty Shafts", "Greasy Grove",
             "Risky Reels", "Fatal Fields", "Lucky Landing", "Junk Junction", "Snobby Shores", "Pleasant Park",
             "Salty Springs", "Loot Lake", "Dusty Divot", "Tilted Towers", "Haunted Hills",
             "Tomato Town", "Lazy Links", "Paradise Palms"]
-
-#G.add_nodes_from(POI_list)
 
 Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "Viking Village", "Racetrack",
                 "Motel", "Yonder Yard", "Desert Village"]
@@ -30,16 +25,12 @@ POI_dict = {"Lonely Lodge": (91, 41), "Retail Row": (75, 53), "Flush Factory": (
             "Retail Offset": (69, 59), "Film Factory": (34, 8), "Tunnel": (66, 35),
             "Willow Tree": (74, 23), "Umbrella": (42, 21)}
 
-# G.add_nodes_from(POI_dict.keys)
-
 
 # INPUTS: either string (POI) or tuple of int (coordinates)
 def distance(c1, c2):
     """Takes set of either POI name/coordinates and returns the distance between them"""
     # Changes from str -> tuple(int)
 
-    print(c1)
-    print(c2)
     if type(c1) == str:
         c1 = POI_dict[c1]
     if type(c2) == str:
@@ -55,23 +46,9 @@ def time(c1, c2):
     return round((74/10) * distance(c1, c2), 2)
 
 
-# def gen_edges():
-#     for k, v in POI_dict.items():
-#         for k2, v2 in POI_dict.items():
-#             if k is not k2:
-#                 G.add_edge(k, k2, weight=time(k, k2))
-
-
-# Prints edges
-# for i, j, d in G.edges(data="weight"):
-#     print(i, j, d)
-
-
 # String processing
 # Expected input: "Lonely Lodge", (C-3,6-2)
 # Or something like: E-6,3-9 | C-3,6-2 -> (46, 29), . . .
-
-
 def process_text(text1, text2):
     letter_dict = {'A': 0, 'B': 10, 'C': 20, 'D': 30, 'E': 40, 'F': 50, 'G': 60, 'H': 70, 'I': 80, 'J': 90}
     result_text1 = None
@@ -93,10 +70,10 @@ def process_text(text1, text2):
     return result_text1, result_text2
 
 
-class Node():
+class Node:
     def __init__(self, name):
         self.name = name
-        self.num_before = 0
+        self.visited_before = []
         self.prev = None
         self.neighbors = []
         self.time_left = 380
@@ -129,48 +106,6 @@ def add_user_input(coords):
     start_node.name = "Unnamed Start Location"
 
 
-# def gen_path() -> [str]:
-#     """Generates path of POIs"""
-#     path = []
-#     time_left = 380
-#     if start_node != "Unnamed Start Location":
-#         time_left -= 90
-#     path.append(start_node)
-#     return path
-
-
-# time_left = 380  # New global variable
-# path = []
-# copy_G = G.copy()
-
-
-# Changed from gen_path()
-# def add_start_node() -> [str]:
-#     """Adds first node to empty list"""
-#     if start_node.name != "Unnamed Start Location":
-#         start_node.time_left -= 90
-#     global path
-#     path.append(start_node)
-
-
-# Assumes that:
-#	Time has already been deducted when necessary
-#	start_node has been added to graph
-
-
-# def gen_copy_G():
-#     """Creates and returns copy of graph that removes nodes inaccessible by initial remaining time"""
-#     radius = time_left
-#     copy_G = G.copy()
-#     for e in copy_G.edges_iter():
-#         if start_node in e and weight < time_left:
-#             for n in e:
-#                 if n != start_node:
-#                     copy_G.remove_node(n)
-#     return copy_G
-# copy_G = gen_copy_G()  # Creates global copy_G
-
-
 final_list = []
 
 
@@ -182,7 +117,7 @@ def time_to_circle(loc):
 def find_neighbors(curr_node) -> None:
     """Find the neighbors of each POI with given time left and start point"""
     for key, value in POI_dict.items():
-        if key == curr_node.name:
+        if key == curr_node.name or (key in curr_node.visited_before):
             pass
         else:
             if curr_node.time_left >= 90 + time_to_circle(key) + time(key, curr_node.name):
@@ -190,8 +125,11 @@ def find_neighbors(curr_node) -> None:
                 neighbor.location = value
                 neighbor.time_left = curr_node.time_left - (90 + time(key, curr_node.name))
                 neighbor.prev = curr_node
+                neighbor.visited_before.append(curr_node.name)
                 if curr_node.prev is not None:
-                    neighbor.num_before = curr_node.num_before + 1
+                    for visited in curr_node.visited_before:
+                        neighbor.visited_before.append(visited)
+                    # neighbor.num_before = curr_node.num_before + 1
                 curr_node.neighbors.append(neighbor)
 
 
@@ -213,8 +151,8 @@ def gen_path() -> list:
     max_node = None
 
     for node in final_list:
-        if node.num_before > max_visited:
-            max_visited = node.num_before
+        if len(node.visited_before) > max_visited:
+            max_visited = len(node.visited_before)
             max_node = node
 
     while max_node is not None:
@@ -248,13 +186,3 @@ def format_path(path_list):
 
 # 290 seconds
 # print(nx.dijkstra_path(G, "Lucky Landing", "Risky Reels"))
-
-
-
-
-
-
-
-
-
-
