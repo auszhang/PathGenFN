@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Fortnite Loot Path</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+          integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+            integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+            crossorigin="">
+    </script>
 </head>
-<body>
+
+<body bgcolor="gray">
     <h1>Fortnite Loot Path Generator</h1>
 {#    <u>Result is:#}
 {#        <li>{{ result_int }}</li>#}
 {#    </u>#}
-    <form method="POST">
-        <input name="text1">
-        <input name="text2">
-        <input type="submit">
-    </form>
+    <div id="map" style="width: 1000px; height: 1000px"></div>
+
+    <script>
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+        });
+
+        var bounds = [[0,0], [500,500]];
+        var image = L.imageOverlay('FortniteMap.png', bounds);
+
+        map.addLayer(image);
+        map.fitBounds(bounds);
+    </script>
 </body>
 </html>
