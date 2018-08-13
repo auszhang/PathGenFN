@@ -1,39 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Fortnite Loot Path</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var start_select = $('#inputGroupSelect01 :selected').text();
+            if (start_select == "Unnamed Location") {
+                var alph = ['A','B','C','D','E','F','G','H','I','J'];
+                var num = ['1','2','3','4','5','6','7','8','9','10']
+                var s00 = $('<select name="start" class="custom-select" id="inputGroupSelect01"/>');
+                for(var letter in alph) {
+                    $('<option />', {value: letter, text: letter}).appendTo(s00);
+                }
+                s00.appendTo('select');
+            }
+        });
+    </script>
+    -->
 </head>
 <body>
-    <h1>Fortnite Loot Path Generator</h1>
-{#    <u>Result is:#}
-{#        <li>{{ result_int }}</li>#}
-{#    </u>#}
+    <h1 class="text-left mx-3 my-2">Fortnite Loot Path Generator</h1>
     <form name="Start Location" action = '/' method='POST'>
-        <select name="start">
-            <option value="Lonely Lodge" selected>Lonely Lodge</option>
-            <option value="Retail Row">Retail Row</option>
-            <option value="Flush Factory">Flush Factory</option>
-            <option value="Shifty Shafts">Shift Shafts</option>
-            <option value="Greasy Grove">Greasy Grove</option>
-            <option value="Risky Reels">Risky Reels</option>
-            <option value="Fatal Fields">Fatal Fields</option>
-            <option value="Lucky Landing">Lucky Landing</option>
-{#            <option value="Junk Junction">Junk Junction</option>#}
-{#            <option value="Snobby Shores">Snobby Shores</option>#}
-{#            <option value="Pleasant Park">Pleasant Park</option>#}
-            <option value="Salty Springs">Salty Springs</option>
-            <option value="Loot Lake">Loot Lake</option>
-            <option value="Dusty Divot">Dusty Divot</option>
-            <option value="Tilted Towers">Tilted Towers</option>
-            <option value="Haunted Hills">Haunted Hills</option>
-            <option value="Tomato Town">Tomato Town</option>
-            <option value="Lazy Links">Lazy Links</option>
-            <option value="Paradise Palms">Paradise Palms</option>
-        </select>
-        <input name="text1">
-        <input type="submit">
+
+        <div class="input-group my-3 col-sm-4">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Start Locations</label>
+            </div>
+            <select name="start" class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="Unnamed Location">Unnamed Location</option>
+                <option value="Lonely Lodge">Lonely Lodge</option>
+                <option value="Retail Row">Retail Row</option>
+                <option value="Flush Factory">Flush Factory</option>
+                <option value="Shifty Shafts">Shift Shafts</option>
+                <option value="Greasy Grove">Greasy Grove</option>
+                <option value="Risky Reels">Risky Reels</option>
+                <option value="Fatal Fields">Fatal Fields</option>
+                <option value="Lucky Landing">Lucky Landing</option>
+                <option value="Salty Springs">Salty Springs</option>
+                <option value="Loot Lake">Loot Lake</option>
+                <option value="Dusty Divot">Dusty Divot</option>
+                <option value="Tilted Towers">Tilted Towers</option>
+                <option value="Haunted Hills">Haunted Hills</option>
+                <option value="Tomato Town">Tomato Town</option>
+                <option value="Lazy Links">Lazy Links</option>
+                <option value="Paradise Palms">Paradise Palms</option>
+            </select>
+        </div>
+        <div id="circle">
+            <div class="input-group my-3 col-sm-4">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect02">Circle Coordinates</label>
+                </div>
+                <select name="circle00" class="custom-select col-xs-1" id="inputGroupSelect02">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text font-weight-bold" for="inputGroupSelect03">-</label>
+                </div>
+                <select name="circle01" class="custom-select" id="inputGroupSelect03">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text font-weight-bold" for="inputGroupSelect04">,</label>
+                </div>
+                <select name="circle10" class="custom-select" id="inputGroupSelect04">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text font-weight-bold" for="inputGroupSelect05">-</label>
+                </div>
+                <select name="circle11" class="custom-select" id="inputGroupSelect05">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+        </div>
+        <input class="btn btn-primary mx-3" type="submit" value="Submit">
     </form>
 </body>
 </html>
