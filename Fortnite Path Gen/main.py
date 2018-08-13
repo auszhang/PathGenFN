@@ -15,8 +15,15 @@ def index():
 @app.route('/', methods=['POST'])
 def magic():
     start = request.form['start']
-    text1 = request.form['text1']
-    processed = process_text(start, text1)
+    if start == "Unnamed Locataion":
+        unnamed = request.form['unnamed']
+        start = unnamed
+    circle00 = request.form['circle00']
+    circle01 = request.form['circle01']
+    circle10 = request.form['circle10']
+    circle11 = request.form['circle11']
+    coordinate = circle00 + "-" + circle01 + ", " + circle10 + "-" + circle11
+    processed = process_text(start, coordinate)
     add_user_input(processed)
     depth_first_search()
     path_list = gen_path()
