@@ -14,16 +14,16 @@ Unnamed_POIs = ["RV Park", "Superhero Mansion", "Crate Yard", "Villain Lair", "V
 # For Risky Reels, I excluded the side houses
 # For Tomato Town, I included the overpass
 POI_dict = {"Lonely Lodge": (91, 41), "Retail Row": (75, 53), "Flush Factory": (34, 88),
-            "Shifty Shafts": (36, 64), "Greasy Grove": (22, 62),
-            "Risky Reels": (75, 19), "Fatal Fields": (61, 76), "Lucky Landing": (57, 92),
-            "Salty Springs": (57, 61), "Loot Lake": (40, 36), "Dusty Divot": (60, 50),
-            "Tilted Towers": (37, 48), "Haunted Hills": (13, 19), "Tomato Town": (67, 30),
-            "Lazy Links": (53, 19), "Paradise Palms": (83, 74), "RV Park": (85, 49),
-            "Superhero Mansion": (97, 50), "Crate Yard": (74, 40), "Villain Lair": (12, 40),
-            "Viking Village": (16, 12), "Racetrack": (93, 60), "Motel": (39, 15),
-            "Western Town": (76, 80), "Yonder Yard": (42, 82), "The Big Chair": (35, 75),
-            "Retail Offset": (69, 59), "Film Factory": (34, 8), "Tunnel": (66, 35),
-            "Willow Tree": (74, 23), "Umbrella": (42, 21)}
+            "Shifty Shafts": (36, 64), "Greasy Grove": (22, 62), "Risky Reels": (75, 19),
+            "Fatal Fields": (61, 76), "Lucky Landing": (57, 92), "Salty Springs": (57, 61),
+            "Loot Lake": (40, 36), "Dusty Divot": (60, 50), "Tilted Towers": (37, 48),
+            "Haunted Hills": (13, 19), "Tomato Town": (67, 30), "Lazy Links": (53, 19),
+            "Paradise Palms": (83, 74), "RV Park": (85, 49), "Superhero Mansion": (97, 50),
+            "Crate Yard": (74, 40), "Villain Lair": (12, 40), "Viking Village": (16, 12),
+            "Racetrack": (93, 60), "Motel": (39, 15), "Factories": (42, 82),
+            "Mexico": (76, 80), "Gas Station": (69, 86), "Oasis": (71, 81),
+            "Chair": (35, 75), "Llama": (16, 6), "Fox": (90, 19),
+            "Soccer Pitch": (23, 48), "Budget Junk Junction": (87, 83), "Tunnel": (66, 35)}
 
 
 # INPUTS: either string (POI) or tuple of int (coordinates)
