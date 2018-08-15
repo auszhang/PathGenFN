@@ -12,25 +12,32 @@ def index():
 # Two text boxes, 1 for start and the other for end
 # Some kind of type checking
 
-@app.route('/', methods=["POST"])
-def index_post():
-    text1 = request.form['text1']
-    text2 = request.form['text2']
-    processed = process_text(text1, text2)
+@app.route('/', methods=['POST'])
+def magic():
+    start = request.form['start']
+    if start == "Unnamed Locataion":
+        unnamed = request.form['unnamed']
+        start = unnamed
+    circle00 = request.form['circle00']
+    circle01 = request.form['circle01']
+    circle10 = request.form['circle10']
+    circle11 = request.form['circle11']
+    coordinate = circle00 + "-" + circle01 + ", " + circle10 + "-" + circle11
+    processed = process_text(start, coordinate)
     add_user_input(processed)
-    gen_edges()
     depth_first_search()
     path_list = gen_path()
     return format_path(path_list)
-
-#not done
-def dropdown():
-    locations = POI_list
-
+#
+# @app.route('/', methods=['GET'])
+# def dropdown():
+#     POIs = POI_dict
+#     return render_template('homepage.html', POIs=POIs)
 
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
 
 
 

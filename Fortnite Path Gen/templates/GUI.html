@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fortnite Loot Path</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+          integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+            integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+            crossorigin="">
+    </script>
+</head>
+
+<body>
+    <h1>Fortnite Loot Path Generator</h1>
+{#    <u>Result is:#}
+{#        <li>{{ result_int }}</li>#}
+{#    </u>#}
+    <div id="map" style="width: 1000px; height: 1000px"></div>
+
+    <script>
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+        });
+
+        var imageurl = "https://i.redd.it/vuhryufcws911.png",
+            bounds = [[0,0], [500,500]];
+
+        L.imageOverlay(imageurl, bounds).addTo(map);
+
+        map.fitBounds(bounds);
+
+        var marker = L.marker.on('click', function(e){
+        
+    </script>
+</body>
+</html>
