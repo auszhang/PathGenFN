@@ -26,8 +26,8 @@ def magic():
     processed = process_text(start, coordinate)
     add_user_input(processed)
     depth_first_search()
-    path_list = gen_path()
-    return format_path(path_list)
+    path_list = format_path(gen_path())
+    return render_template("homepage.html", path=path_list)
 #
 # @app.route('/', methods=['GET'])
 # def dropdown():

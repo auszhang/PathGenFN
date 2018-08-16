@@ -119,7 +119,10 @@
                 </select>
             </div>
         </div>
-        <input class="btn btn-primary mx-3" type="submit" value="Submit">
+        <input class="btn btn-primary mx-3" type="Submit" value="Submit">
+        {% if path != None %}
+        {{path}}
+        {% endif %}
     </form>
 </body>
 </html>
